@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for i in category %}
+    <article class="row blog_item">
+        <div class="col-md-3">
+            <div class="blog_info text-right">
+                <div class="post_tag">
+                    <a href="#">Food,</a>
+                    <a class="active" href="{% url 'category' i.category.id %}">{{ i.category }},</a>
+                    <a href="#">Politics,</a>
+                    <a href="#">Lifestyle</a>
+                </div>
+                <ul class="blog_meta list">
+                    <li><a href="#">{{ i.author }}<i class="lnr lnr-user"></i></a></li>
+                    <li><a href="#">{{ i.date }}<i class="lnr lnr-calendar-full"></i></a></li>
+                    <li><a href="#">{{ i.view_count }}<i class="lnr lnr-eye"></i></a></li>
+                    <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="blog_post">
+                {% if i.image %}
+                <img src="{{i.image.url}}" alt="">
+                {% else %}
+                <img src="" alt="">
+                {% endif %}
+                <div class="blog_details">
+                    <a href="{% url 'post_detail' i.id %}">
+                        <h2>{{ i.title }}</h2>
+                    </a>
+                    <p>{{ i.content }}</p>
+                    <a href="{% url 'post_detail' i.id %}" class="blog_btn">View More</a>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endfor %}
+
+{% endblock %}
